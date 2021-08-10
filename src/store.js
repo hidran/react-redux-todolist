@@ -20,11 +20,8 @@ const initTodos = [
 const reducer = (state, action) => {
     switch (action.type) {
         case   'ADD_TODO':
-            const newTodo = {
-                name: action.payload.name, user_id: 1,
-                dueDate: new Date().toLocaleDateString()
-            }
-   return  [ newTodo, ...state ];
+           
+   return  [ action.payload, ...state ];
  
         default:
             return state;
@@ -32,4 +29,4 @@ const reducer = (state, action) => {
      
 };
 
-export const store = createStore(reducer, initTodos);
+export const store = createStore(reducer, initTodos,window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());

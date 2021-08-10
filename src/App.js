@@ -1,5 +1,8 @@
-import React,{useState, useEffect, useRef} from 'react';
-
+import React, {
+  useRef
+} from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from './actions';
 import './App.css';
 
 const initTodos = [
@@ -21,27 +24,16 @@ const initTodos = [
 
 ];
 
-function App(props) {
-  console.log(props);
-  const [todos, setTodos] = useState([]);
+function App({addTodo, todos}) {
+ 
+  
 
   const todoEl = useRef('');
-
-  useEffect(() => {
-    setTodos(initTodos);
-    return () => {
-      
-    }
-  }, []);
-
-  const addTodo = (e) => {
-    e.preventDefault();
-    
-    
-    const newTodo = {name:todoEl.current.value,user_id:1, dueDate: new Date().toLocaleDateString()}
-    setTodos([ newTodo, ...todos ]);
-  };
-
+  const manageClick = (e) => {
+     e.preventDefault();
+    addTodo(todoEl.current.value);
+  }
+ 
   return (
     <div className="App container-fluid">
       <div className="row d-flex justify-content-center">
@@ -50,7 +42,7 @@ function App(props) {
           <form>
             <div className="form-group">
               <input ref = {todoEl} className="form-field" name="todo" id="todo" />
-               <button onClick ={addTodo} className=" m-1 btn btn-success">ADD</button>
+               <button onClick ={manageClick} className=" m-1 btn btn-success">ADD</button>
             </div>
            
           </form>
@@ -65,5 +57,13 @@ function App(props) {
     </div>
   );
 }
-
-export default App;
+const matchStateToProps = (state) => {
+  return { todos: [...state] };
+}
+const mapDispatchToPros = (dispatch) => {
+  return {
+    addTodo: (name) => dispatch(addTodo(name))
+  }
+}
+const createConnector = connect(matchStateToProps, mapDispatchToPros);
+export default createConnector(App);
