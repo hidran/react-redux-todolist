@@ -2,7 +2,7 @@ import React, {
   useRef
 } from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from './actions';
+import { addTodo,deleteTodo } from './actions';
 import './App.css';
 
 const initTodos = [
@@ -24,7 +24,7 @@ const initTodos = [
 
 ];
 
-function App({addTodo, todos}) {
+function App({addTodo, deleteTodo,todos}) {
  
   
 
@@ -49,7 +49,9 @@ function App({addTodo, todos}) {
      
       <ul className="list-group list-group-flush">
         {
-          todos.map(todo => <li key={todo.name} className="list-group-item">{ todo.name}</li>)
+              todos.map(todo => <li key={todo.name} className="list-group-item">{todo.name}
+              <button onClick={() => deleteTodo(todo)} className="btn btn-danger btn-sm">DELETE</button>
+              </li>)
         }
           </ul>
           </div>
@@ -60,10 +62,12 @@ function App({addTodo, todos}) {
 const matchStateToProps = (state) => {
   return { todos: [...state] };
 }
-const mapDispatchToPros = (dispatch) => {
+/*const mapDispatchToPros = (dispatch) => {
   return {
-    addTodo: (name) => dispatch(addTodo(name))
+    addTodo: name => dispatch(addTodo(name)),
+    deleteTodo: todo => dispatch(deleteTodo(todo))
   }
 }
-const createConnector = connect(matchStateToProps, mapDispatchToPros);
+*/
+const createConnector = connect(matchStateToProps,{addTodo, deleteTodo} );
 export default createConnector(App);
