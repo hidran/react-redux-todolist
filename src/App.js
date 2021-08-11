@@ -1,37 +1,18 @@
 import React, {
   useRef
 } from 'react';
-import { connect } from 'react-redux';
-import { addTodo,deleteTodo } from './actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { addTodo,removeTodo } from './features/todos/todosSlice';
 import './App.css';
 
-const initTodos = [
-  {
-    name: 'Call my mum',
-    dueDate: new Date().toLocaleDateString(),
-    user_id : 1
-  },
-   {
-    name: 'Go to school',
-    dueDate: new Date().toLocaleDateString(),
-    user_id : 1
-  },
-    {
-    name: 'Do my homework',
-    dueDate: new Date().toLocaleDateString(),
-    user_id : 1
-  }
-
-];
-
-function App({addTodo, deleteTodo,todos}) {
+function App() {
  
-  
-
+   const todos = useSelector(state => state.todos)
+  const dispatch = useDispatch();
   const todoEl = useRef('');
   const manageClick = (e) => {
      e.preventDefault();
-    addTodo(todoEl.current.value);
+    dispatch(addTodo({ name:todoEl.current.value, dueDate: (new Date()).toLocaleDateString(), user_id:1 }));
   }
  
   return (
@@ -50,7 +31,7 @@ function App({addTodo, deleteTodo,todos}) {
       <ul className="list-group list-group-flush">
         {
               todos.map(todo => <li key={todo.name} className="list-group-item">{todo.name}
-              <button onClick={() => deleteTodo(todo)} className="btn btn-danger btn-sm">DELETE</button>
+              <button onClick={() => dispatch(removeTodo(todo))} className="btn btn-danger btn-sm">DELETE</button>
               </li>)
         }
           </ul>
@@ -69,5 +50,5 @@ const matchStateToProps = (state) => {
   }
 }
 */
-const createConnector = connect(matchStateToProps,{addTodo, deleteTodo} );
-export default createConnector(App);
+
+export default App;
