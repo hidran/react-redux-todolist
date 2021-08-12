@@ -2,8 +2,9 @@ import React, {
   useRef
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo,removeTodo } from './features/todos/todosSlice';
+import { addTodo} from './features/todos/todosSlice';
 import './App.css';
+import Todos from './features/Todos';
 
 function App() {
  
@@ -12,7 +13,7 @@ function App() {
   const todoEl = useRef('');
   const manageClick = (e) => {
      e.preventDefault();
-    dispatch(addTodo({ name:todoEl.current.value, dueDate: (new Date()).toLocaleDateString(), user_id:1 }));
+    dispatch(addTodo({ id:todos.length+1, name:todoEl.current.value, dueDate: (new Date()).toLocaleDateString(), user_id:1 }));
   }
  
   return (
@@ -28,27 +29,12 @@ function App() {
            
           </form>
      
-      <ul className="list-group list-group-flush">
-        {
-              todos.map(todo => <li key={todo.name} className="list-group-item">{todo.name}
-              <button onClick={() => dispatch(removeTodo(todo))} className="btn btn-danger btn-sm">DELETE</button>
-              </li>)
-        }
-          </ul>
+          <Todos todos={todos}/>
           </div>
      </div>
     </div>
   );
 }
-const matchStateToProps = (state) => {
-  return { todos: [...state] };
-}
-/*const mapDispatchToPros = (dispatch) => {
-  return {
-    addTodo: name => dispatch(addTodo(name)),
-    deleteTodo: todo => dispatch(deleteTodo(todo))
-  }
-}
-*/
+
 
 export default App;
