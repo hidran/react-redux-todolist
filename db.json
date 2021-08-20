@@ -1,0 +1,27 @@
+{
+    "todos": [{
+            "completed": true,
+            "name": "Call my mum",
+            "dueDate": "20/8/2021",
+            "user_id": 1,
+            "id": 1
+        },
+        {
+            "completed": false,
+            "name": "Go to school",
+            "dueDate": "20/8/2021",
+            "user_id": 1,
+            "id": 2
+        },
+        {
+            "completed": true,
+            "name": "Do my homework",
+            "dueDate": "20/8/2021",
+            "user_id": 1,
+            "id": 3
+        }
+    ],
+    "filter": [
+        "ALL"
+    ]
+}

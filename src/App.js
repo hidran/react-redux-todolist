@@ -1,8 +1,8 @@
 import React, {
-  useRef
+  useRef, useEffect
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo } from './features/todos/todosSlice';
+import { addTodo, getTodos } from './features/todos/todosSlice';
 import { filterTodo } from './features/todos/filterSlice';
 import './App.css';
 import Todos from './features/Todos';
@@ -11,7 +11,14 @@ import AddTodo from './features/todos/AddTodo';
 import FilterTodo from './features/todos/FilterTodo';
 
 function App() {
- 
+  const dispatch = useDispatch();
+  
+   useEffect(() => {
+    dispatch(getTodos());
+    return () => {
+     
+    }
+  }, [dispatch])
   let todos = useSelector(state => state.todos);
   const activeFilter = useSelector(state => state.filter);
   todos = todos.filter(todo => {
@@ -24,7 +31,7 @@ function App() {
     // default TODO
     return !todo.completed;
   });
-  const dispatch = useDispatch();
+  
   const todoEl = useRef('');
   const manageClick = (e) => {
      e.preventDefault();
