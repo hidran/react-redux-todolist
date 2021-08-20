@@ -15,7 +15,7 @@ import logger from 'redux-logger';
    
 ;
 */
-const preloadedState = {
+/*const preloadedState = {
   todos: [
     {
       completed: true,
@@ -41,7 +41,7 @@ const preloadedState = {
 
   ],
   filter: 'ALL'
-};
+};*/
 export const store = configureStore({
  // preloadedState,
   reducer: {

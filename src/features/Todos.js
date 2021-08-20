@@ -9,8 +9,9 @@ export const Todos = ({ todos }) => {
     const onRemove = (todo) => {
         dispatch(removeTodo(todo));
     }
-     const onToggle= (todo) => {
-        dispatch(toggleTodo(todo));
+    const onToggle = (todo) => {
+          const newtodo ={...todo, completed:!todo.completed};
+        dispatch(toggleTodo(newtodo));
     }
     return (
        <ul className="list-group list-group-flush">

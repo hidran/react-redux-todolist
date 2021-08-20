@@ -35,7 +35,8 @@ function App() {
   const todoEl = useRef('');
   const manageClick = (e) => {
      e.preventDefault();
-    dispatch(addTodo({ id:todos.length+1, name:todoEl.current.value, dueDate: (new Date()).toLocaleDateString(), user_id:1 }));
+    dispatch(addTodo({  name:todoEl.current.value, dueDate: (new Date()).toLocaleDateString(), user_id:1 }));
+    todoEl.current.value = '';
   }
   const onFilterTodo = (filter) => {
     dispatch(filterTodo(filter));
