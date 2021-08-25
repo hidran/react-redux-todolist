@@ -18,7 +18,8 @@
       "id": 4,
       "name": "my new todo",
       "dueDate": "20/8/2021",
-      "user_id": 1
+      "user_id": 1,
+      "completed": true
     },
     {
       "id": 5,
@@ -37,12 +38,6 @@
       "dueDate": "20/8/2021",
       "user_id": 1,
       "id": 8
-    },
-    {
-      "name": "cvcvc",
-      "dueDate": "25/8/2021",
-      "user_id": "1",
-      "id": 9
     }
   ],
   "filter": [

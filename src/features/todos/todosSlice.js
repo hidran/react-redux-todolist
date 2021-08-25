@@ -34,7 +34,7 @@ export const todosSlice = createSlice({
     },
 });
 
-const { actions, reducer } = todosSlice;
+const { reducer } = todosSlice;
 
 export default reducer;
 export { getTodos, removeTodo, toggleTodo, addTodo };

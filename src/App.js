@@ -23,8 +23,10 @@ function App() {
             });
         return () => {};
     }, [dispatch]);
+  
     let todos = useSelector((state) => state.todos);
-    const activeFilter = useSelector((state) => state.filter);
+  const activeFilter = useSelector((state) => state.filter);
+  
     todos = todos.filter((todo) => {
         if (activeFilter === 'ALL') {
             return true;
