@@ -11,11 +11,21 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Mytodos from './features/todos/Mytodos';
 import Mylists from './features/lists/Mylists';
 import Header from './components/Header';
+import { useGetListsQuery } from './service/listsService';
 
 function App() {
     const dispatch = useDispatch();
+    const { data: lists = [], error, isLoading } = useGetListsQuery();
+
+    console.log(lists, error, isLoading);
 
     useEffect(() => {
+        if (error) {
+            toast.error(error);
+        }
+        if (isLoading) {
+            toast.info('Loading lists');
+        }
         dispatch(getTodos())
             .unwrap()
             .then((res) => {})
@@ -23,7 +33,7 @@ function App() {
                 toast.error(error.message);
             });
         return () => {};
-    }, [dispatch]);
+    }, [dispatch, error, isLoading]);
 
     let todos = useSelector((state) => state.todos);
     const activeFilter = useSelector((state) => state.filter);
@@ -54,20 +64,7 @@ function App() {
     const onFilterTodo = (filter) => {
         dispatch(filterTodo(filter));
     };
-    const lists = [
-        {
-            name: 'Supermarket',
-            created_at: '2021-08-30 12:12',
-            user_id: 1,
-            id: 1,
-        },
-        {
-            name: 'School',
-            created_at: '2021-08-30 12:12',
-            user_id: 1,
-            id: 2,
-        },
-    ];
+
     return (
         <div className='App container'>
             <Router>

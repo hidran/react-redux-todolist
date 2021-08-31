@@ -11,7 +11,7 @@ export default function List({ list }) {
 }
 List.propTypes = {
     list: PropTypes.shape({
-        name: PropTypes.bool,
+        name: PropTypes.string,
         created_at: PropTypes.string,
         user_id: PropTypes.number,
         id: PropTypes.number,
