@@ -5,13 +5,6 @@
       "name": "Do my homework",
       "dueDate": "20/8/2021",
       "user_id": 1,
-      "id": 3
-    },
-    {
-      "completed": true,
-      "name": "Do my homework",
-      "dueDate": "20/8/2021",
-      "user_id": 1,
       "id": 6
     },
     {

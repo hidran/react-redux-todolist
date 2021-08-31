@@ -3,14 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addTodo, getTodos } from './features/todos/todosSlice';
 import { filterTodo } from './features/todos/filterSlice';
 import './App.css';
-import Todos from './features/todos/Todos';
 
-import AddTodo from './features/todos/AddTodo';
-import FilterTodo from './features/todos/FilterTodo';
-import ErrorBoundary from './components/ErrorBoundary';
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Mytodos from './features/todos/Mytodos';
+import Mylists from './features/lists/Mylists';
 function App() {
     const dispatch = useDispatch();
 
@@ -23,10 +22,10 @@ function App() {
             });
         return () => {};
     }, [dispatch]);
-  
+
     let todos = useSelector((state) => state.todos);
-  const activeFilter = useSelector((state) => state.filter);
-  
+    const activeFilter = useSelector((state) => state.filter);
+
     todos = todos.filter((todo) => {
         if (activeFilter === 'ALL') {
             return true;
@@ -56,17 +55,24 @@ function App() {
 
     return (
         <div className='App container-fluid'>
-            <div className='row d-flex justify-content-center'>
-                <h1>MY TODO LIST</h1>
-                <div className='col-md-6'>
-                    <AddTodo todoEl={todoEl} manageClick={manageClick} />
-                    <ErrorBoundary>
-                        <Todos todos={todos} />
-                    </ErrorBoundary>
-
-                    <FilterTodo filter={activeFilter} onFilter={onFilterTodo} />
+            <Router>
+                <div className='row d-flex justify-content-center'>
+                    <Switch>
+                        <Route path='/todos'>
+                            <Mytodos
+                                todos={todos}
+                                todoEl={todoEl}
+                                onFilterTodo={onFilterTodo}
+                                activeFilter={activeFilter}
+                                manageClick={manageClick}
+                            />
+                        </Route>
+                        <Route exact path='/'>
+                            <Mylists />
+                        </Route>
+                    </Switch>
                 </div>
-            </div>
+            </Router>
             <ToastContainer
                 position='bottom-right'
                 autoClose={4000}
