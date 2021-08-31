@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Mytodos from './features/todos/Mytodos';
 import Mylists from './features/lists/Mylists';
+import Header from './components/Header';
+
 function App() {
     const dispatch = useDispatch();
 
@@ -52,11 +54,25 @@ function App() {
     const onFilterTodo = (filter) => {
         dispatch(filterTodo(filter));
     };
-
+    const lists = [
+        {
+            name: 'Supermarket',
+            created_at: '2021-08-30 12:12',
+            user_id: 1,
+            id: 1,
+        },
+        {
+            name: 'School',
+            created_at: '2021-08-30 12:12',
+            user_id: 1,
+            id: 2,
+        },
+    ];
     return (
-        <div className='App container-fluid'>
+        <div className='App container'>
             <Router>
                 <div className='row d-flex justify-content-center'>
+                    <Header />
                     <Switch>
                         <Route path='/todos'>
                             <Mytodos
@@ -67,8 +83,8 @@ function App() {
                                 manageClick={manageClick}
                             />
                         </Route>
-                        <Route exact path='/'>
-                            <Mylists />
+                        <Route exact path='(/|/lists)'>
+                            <Mylists lists={lists} />
                         </Route>
                     </Switch>
                 </div>
