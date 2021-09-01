@@ -3,20 +3,45 @@ import { LIST_URL } from '../config';
 // Define a service using a base URL and expected endpointsexport
 export const listsApi = createApi({
     reducerPath: 'lists',
+    tagTypes: ['LIST'],
     baseQuery: fetchBaseQuery({
         baseUrl: LIST_URL,
     }),
     endpoints: (builder) => ({
         getLists: builder.query({
             query: () => '',
+            providesTags: ['LIST'], // (result, error) => result.map((ele) => {type:'LIST', id:ele.id})
         }),
         deleteList: builder.mutation({
             query: (id) => ({
                 url: '/' + id,
                 method: 'DELETE',
             }),
+
+            invalidatesTags: ['LIST'], // (result,error, id) => {type:'LIST', id:id}
+        }),
+        addList: builder.mutation({
+            query: (list) => ({
+                url: '',
+                method: 'POST',
+                body: list,
+            }),
+        }),
+        updateList: builder.mutation({
+            query: ({ id, ...body }) => ({
+                url: '/' + id,
+                method: 'PATCH',
+                body,
+            }),
+
+            invalidatesTags: ['LIST'], // (result,error, id) => {type:'LIST', id:id}
         }),
     }),
 });
 
-export const { useGetListsQuery, useDeleteListMutation } = listsApi;
+export const {
+    useUpdateListMutation,
+    useAddListMutation,
+    useGetListsQuery,
+    useDeleteListMutation,
+} = listsApi;

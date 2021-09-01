@@ -41,7 +41,7 @@ const Lists = () => {
                             removeList(id)
                                 .unwrap()
                                 .then(() => {
-                                    reloadLists();
+                                    // reloadLists();
                                 })
                                 .catch((err) => toast.error(err.message));
                         }}
