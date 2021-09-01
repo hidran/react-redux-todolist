@@ -4,36 +4,27 @@ import { addTodo, getTodos } from './features/todos/todosSlice';
 import { filterTodo } from './features/todos/filterSlice';
 import './App.css';
 
-import { ToastContainer, toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Mytodos from './features/todos/Mytodos';
 import Mylists from './features/lists/Mylists';
 import Header from './components/Header';
-import { useGetListsQuery } from './service/listsService';
 
+import Lists from './features/lists/Lists';
+import { ToastContainer } from 'react-toastify';
 function App() {
     const dispatch = useDispatch();
-    const { data: lists = [], error, isLoading } = useGetListsQuery();
-
-    console.log(lists, error, isLoading);
 
     useEffect(() => {
-        if (error) {
-            toast.error(error);
-        }
-        if (isLoading) {
-            toast.info('Loading lists');
-        }
-        dispatch(getTodos())
+        /*dispatch(getTodos())
             .unwrap()
             .then((res) => {})
             .catch((error) => {
                 toast.error(error.message);
             });
+            */
         return () => {};
-    }, [dispatch, error, isLoading]);
+    }, []);
 
     let todos = useSelector((state) => state.todos);
     const activeFilter = useSelector((state) => state.filter);
@@ -81,7 +72,7 @@ function App() {
                             />
                         </Route>
                         <Route exact path='(/|/lists)'>
-                            <Mylists lists={lists} />
+                            <Lists />
                         </Route>
                     </Switch>
                 </div>
