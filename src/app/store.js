@@ -1,18 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit';
-import todosReducer from '../features/todos/todosSlice';
+
 import filterReducer from '../features/todos/filterSlice';
 import logger from 'redux-logger';
 import { listsApi } from '../service/listsService';
+import { todosApi } from '../service/todosService';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 export const store = configureStore({
     // preloadedState,
     reducer: {
         filter: filterReducer,
-        todos: todosReducer,
+        [todosApi.reducerPath]: todosApi.reducer,
         [listsApi.reducerPath]: listsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(logger, listsApi.middleware),
+        getDefaultMiddleware().concat(
+            logger,
+            listsApi.middleware,
+            todosApi.middleware
+        ),
 });
 setupListeners(store.dispatch);
 /*

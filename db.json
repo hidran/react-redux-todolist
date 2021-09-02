@@ -18,49 +18,40 @@
       "id": 5,
       "name": "another new todo",
       "dueDate": "20/8/2021",
-      "user_id": 1
+      "user_id": 1,
+      "completed": true
     },
     {
       "name": "let's doit",
       "dueDate": "20/8/2021",
       "user_id": 1,
-      "id": 7
+      "id": 7,
+      "completed": true
     },
     {
       "name": "last todo",
       "dueDate": "20/8/2021",
       "user_id": 1,
-      "id": 8
-    },
-    {
-      "name": "asdasd",
-      "dueDate": "31/8/2021",
-      "user_id": 1,
-      "id": 9
-    },
-    {
-      "name": "sdasd",
-      "dueDate": "31/8/2021",
-      "user_id": 1,
-      "id": 10
-    },
-    {
-      "name": "sadasd",
-      "dueDate": "31/8/2021",
-      "user_id": 1,
-      "id": 11
-    },
-    {
-      "name": "sadasdas",
-      "dueDate": "31/8/2021",
-      "user_id": 1,
-      "id": 12
+      "id": 8,
+      "completed": true
     },
     {
       "name": "asdasdasd",
       "dueDate": "31/8/2021",
       "user_id": 1,
       "id": 13
+    },
+    {
+      "name": "dsdsd",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "id": 14
+    },
+    {
+      "name": "new todo now",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "id": 15
     }
   ],
   "filter": [
