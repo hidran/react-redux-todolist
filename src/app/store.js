@@ -15,3 +15,11 @@ export const store = configureStore({
         getDefaultMiddleware().concat(logger, listsApi.middleware),
 });
 setupListeners(store.dispatch);
+/*
+
+ {
+      "name": "test",
+      "id": 1,
+      "user_id": 1
+    }
+*/

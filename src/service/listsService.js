@@ -10,7 +10,12 @@ export const listsApi = createApi({
     endpoints: (builder) => ({
         getLists: builder.query({
             query: () => '',
-            providesTags: ['LIST'], // (result, error) => result.map((ele) => {type:'LIST', id:ele.id})
+            providesTags: (result, error) => {
+                if (error || !result) {
+                    return [{ type: 'LIST' }];
+                }
+                return result.map((ele) => ({ type: 'LIST', id: ele.id }));
+            },
         }),
         deleteList: builder.mutation({
             query: (id) => ({
@@ -26,6 +31,7 @@ export const listsApi = createApi({
                 method: 'POST',
                 body: list,
             }),
+            invalidatesTags: ['LIST'],
         }),
         updateList: builder.mutation({
             query: ({ id, ...body }) => ({

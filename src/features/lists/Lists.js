@@ -2,11 +2,13 @@ import List from './List';
 import {
     useGetListsQuery,
     useDeleteListMutation,
+    useAddListMutation,
 } from '../../service/listsService';
 import { toast } from 'react-toastify';
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useRef } from 'react';
+import AddList from '../../components/AddElement';
 const Lists = () => {
+    const listEl = useRef('');
     const {
         data: lists = [],
         error,
@@ -19,6 +21,17 @@ const Lists = () => {
         removeList,
         { isLoading: isDeleting, isSuccess, error: deleteError, isError },
     ] = useDeleteListMutation();
+
+    const [
+        addList,
+        {
+            isLoading: isAdding,
+            isSuccess: isAddSuccess,
+            error: addError,
+            isError: isAddError,
+        },
+    ] = useAddListMutation();
+
     useEffect(() => {
         if (error) {
             toast.error(error);
@@ -31,9 +44,22 @@ const Lists = () => {
         }
         return () => {};
     }, [error, isFetching]);
+
+    const manageClick = (evt) => {
+        evt.preventDefault();
+        addList({ name: listEl.current.value, user_id: 1 });
+    };
+    if (isAddSuccess) {
+        listEl.current.value = '';
+    }
     return (
         <>
             <h1>My lists</h1>
+            <AddList
+                Ele={listEl}
+                manageClick={manageClick}
+                txtButton={'Add list'}
+            />
             <ul className='list-group list-group-flush'>
                 {lists.map((list) => (
                     <List

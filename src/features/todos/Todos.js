@@ -2,6 +2,7 @@ import { removeTodo, toggleTodo } from './todosSlice';
 import { useDispatch } from 'react-redux';
 import Todo from './Todo';
 import PropTypes from 'prop-types';
+
 export const Todos = ({ todos }) => {
     const dispatch = useDispatch();
     const onRemove = (todo) => {

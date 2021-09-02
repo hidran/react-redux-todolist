@@ -66,5 +66,16 @@
   "filter": [
     "ALL"
   ],
-  "lists": []
+  "lists": [
+    {
+      "name": "dssd",
+      "user_id": 1,
+      "id": 1
+    },
+    {
+      "name": "new todo",
+      "user_id": 1,
+      "id": 2
+    }
+  ]
 }

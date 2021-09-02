@@ -1,6 +1,6 @@
 import Todos from './Todos';
 
-import AddTodo from './AddTodo';
+import AddTodo from '../../components/AddElement';
 import FilterTodo from './FilterTodo';
 import ErrorBoundary from '../../components/ErrorBoundary';
 
@@ -15,7 +15,7 @@ const Mytodos = ({
         <>
             <h1>MY TODO LIST</h1>
             <div className='col-md-6'>
-                <AddTodo todoEl={todoEl} manageClick={manageClick} />
+                <AddTodo Ele={todoEl} manageClick={manageClick} />
                 <ErrorBoundary>
                     <Todos todos={todos} />
                 </ErrorBoundary>
