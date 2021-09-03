@@ -60,20 +60,9 @@ const Lists = () => {
                 manageClick={manageClick}
                 txtButton={'Add list'}
             />
-            <ul className='list-group list-group-flush' id="ListList">
+            <ul className='list-group list-group-flush' id='ListList'>
                 {lists.map((list) => (
-                    <List
-                        onRemoveList={(id) => {
-                            removeList(id)
-                                .unwrap()
-                                .then(() => {
-                                    // reloadLists();
-                                })
-                                .catch((err) => toast.error(err.message));
-                        }}
-                        key={list.id}
-                        list={list}
-                    />
+                    <List onRemoveList={removeList} key={list.id} list={list} />
                 ))}
             </ul>
         </>

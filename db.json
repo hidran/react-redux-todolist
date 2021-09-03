@@ -81,6 +81,34 @@
       "list_id": 2,
       "id": 19,
       "completed": true
+    },
+    {
+      "name": "my first todo",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "list_id": 3,
+      "id": 20
+    },
+    {
+      "name": "my second todo",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "list_id": 3,
+      "id": 21
+    },
+    {
+      "name": "another todo",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "list_id": 3,
+      "id": 22
+    },
+    {
+      "name": "what a day",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "list_id": 3,
+      "id": 23
     }
   ],
   "filter": [
@@ -88,14 +116,14 @@
   ],
   "lists": [
     {
-      "name": "dssd",
-      "user_id": 1,
-      "id": 1
-    },
-    {
-      "name": "new todo",
+      "name": "my second list test",
       "user_id": 1,
       "id": 2
+    },
+    {
+      "name": "my third list",
+      "user_id": 1,
+      "id": 3
     }
   ]
 }

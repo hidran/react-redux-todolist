@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Lists from './features/lists/Lists';
 
 import { ToastContainer } from 'react-toastify';
+import EditList from './features/lists/EditList';
 function App() {
     useEffect(() => {
         return () => {};
@@ -28,6 +29,9 @@ function App() {
                         </Route>
                         <Route path='/lists/:list_id/todos'>
                             <Mytodos />
+                        </Route>
+                        <Route path='/lists/:list_id/edit'>
+                            <EditList />
                         </Route>
                         <Route exact path='(/|/lists)'>
                             <Lists />

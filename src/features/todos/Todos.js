@@ -1,9 +1,7 @@
-import { useDispatch } from 'react-redux';
 import Todo from './Todo';
 import PropTypes from 'prop-types';
 
 export const Todos = ({ todos, removeTodo, updateTodo }) => {
-    const dispatch = useDispatch();
     const onRemove = (todo) => {
         removeTodo(todo.id);
     };
@@ -18,7 +16,7 @@ export const Todos = ({ todos, removeTodo, updateTodo }) => {
     };
 
     return (
-        <ul className='list-group list-group-flush' id="TodoList">
+        <ul className='list-group list-group-flush' id='TodoList'>
             {todos.map((todo) => (
                 <Todo
                     key={todo.id}
