@@ -26,6 +26,9 @@ function App() {
                         <Route path='/todos'>
                             <Mytodos />
                         </Route>
+                        <Route path='/lists/:list_id/todos'>
+                            <Mytodos />
+                        </Route>
                         <Route exact path='(/|/lists)'>
                             <Lists />
                         </Route>

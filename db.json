@@ -52,6 +52,35 @@
       "created_at": "3/9/2021",
       "user_id": 1,
       "id": 15
+    },
+    {
+      "name": "todo for dssd",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "list_id": 1,
+      "id": 16
+    },
+    {
+      "name": "sdsdsd",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "list_id": 1,
+      "id": 17
+    },
+    {
+      "name": "another todo",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "list_id": 2,
+      "id": 18
+    },
+    {
+      "name": "sdsd",
+      "created_at": "3/9/2021",
+      "user_id": 1,
+      "list_id": 2,
+      "id": 19,
+      "completed": true
     }
   ],
   "filter": [

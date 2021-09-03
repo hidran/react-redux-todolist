@@ -12,9 +12,15 @@ import {
     useUpdateTodoMutation,
 } from '../../service/todosService';
 import { useRef } from 'react';
+import { useLocation, useParams, useRouteMatch } from 'react-router-dom';
 
 const Mytodos = () => {
     const dispatch = useDispatch();
+    let { list_id } = useParams();
+    list_id = Number(list_id);
+    const { search } = useLocation();
+    const pars = new URLSearchParams(search);
+    const list_name = pars.get('list_name') ?? '';
     const todoEl = useRef('');
     const activeFilter = useSelector((state) => state.filter);
 
@@ -28,7 +34,7 @@ const Mytodos = () => {
         isLoading,
         isFetching,
         refetch: reloadLists,
-    } = useGetTodosQuery();
+    } = useGetTodosQuery(list_id);
 
     const todos = data.filter((todo) => {
         if (activeFilter === 'ALL') {
@@ -71,12 +77,14 @@ const Mytodos = () => {
             name: todoEl.current.value,
             created_at: new Date().toLocaleDateString(),
             user_id: 1,
+            list_id,
         });
         todoEl.current.value = '';
     };
+
     return (
         <>
-            <h1>MY TODO LIST</h1>
+            <h1> {list_name}</h1>
             <div className='col-md-6'>
                 <AddTodo Ele={todoEl} manageClick={manageClick} />
                 <ErrorBoundary>

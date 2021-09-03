@@ -9,7 +9,7 @@ export const todosApi = createApi({
     }),
     endpoints: (builder) => ({
         getTodos: builder.query({
-            query: () => '',
+            query: (list_id = '') => '?list_id=' + list_id,
             providesTags: (result, error) => {
                 if (error || !result) {
                     return [{ type: 'TODOS' }];
