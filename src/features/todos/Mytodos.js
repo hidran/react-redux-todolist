@@ -29,7 +29,7 @@ const Mytodos = () => {
     };
 
     const {
-        data = [],
+        data: { data = [] } = {},
         error,
         isLoading,
         isFetching,

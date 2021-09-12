@@ -10,7 +10,7 @@ import AddList from '../../components/AddElement';
 const Lists = () => {
     const listEl = useRef('');
     const {
-        data: lists = [],
+        data: { data: lists = [] } = {},
         error,
         isLoading,
         isFetching,

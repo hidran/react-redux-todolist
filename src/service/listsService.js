@@ -11,10 +11,10 @@ export const listsApi = createApi({
         getLists: builder.query({
             query: () => '',
             providesTags: (result, error) => {
-                if (error || !result) {
+                if (error || !result || !result.data) {
                     return [{ type: 'LIST' }];
                 }
-                return result.map((ele) => ({ type: 'LIST', id: ele.id }));
+                return result.data.map((ele) => ({ type: 'LIST', id: ele.id }));
             },
         }),
         deleteList: builder.mutation({

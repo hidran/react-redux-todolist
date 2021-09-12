@@ -11,10 +11,13 @@ export const todosApi = createApi({
         getTodos: builder.query({
             query: (list_id = '') => '?list_id=' + list_id,
             providesTags: (result, error) => {
-                if (error || !result) {
+                if (error || !result || !result.data) {
                     return [{ type: 'TODOS' }];
                 }
-                return result.map((ele) => ({ type: 'TODOS', id: ele.id }));
+                return result.data.map((ele) => ({
+                    type: 'TODOS',
+                    id: ele.id,
+                }));
             },
         }),
         deleteTodo: builder.mutation({
