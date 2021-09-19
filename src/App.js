@@ -13,6 +13,7 @@ import Lists from './features/lists/Lists';
 
 import { ToastContainer } from 'react-toastify';
 import EditList from './features/lists/EditList';
+import Login from './features/auth/Login';
 function App() {
     useEffect(() => {
         return () => {};
@@ -24,6 +25,7 @@ function App() {
                 <div className='row d-flex justify-content-center'>
                     <Header />
                     <Switch>
+                        <Route path='/login' component={Login}></Route>
                         <Route path='/todos'>
                             <Mytodos />
                         </Route>

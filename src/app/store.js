@@ -5,18 +5,21 @@ import logger from 'redux-logger';
 import { listsApi } from '../service/listsService';
 import { todosApi } from '../service/todosService';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import { AuthApi } from '../service/authService';
 export const store = configureStore({
     // preloadedState,
     reducer: {
         filter: filterReducer,
         [todosApi.reducerPath]: todosApi.reducer,
         [listsApi.reducerPath]: listsApi.reducer,
+        [AuthApi.reducerPath]: AuthApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
             logger,
             listsApi.middleware,
-            todosApi.middleware
+            todosApi.middleware,
+            AuthApi.middleware
         ),
 });
 setupListeners(store.dispatch);
