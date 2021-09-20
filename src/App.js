@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+
 
 import './App.css';
 

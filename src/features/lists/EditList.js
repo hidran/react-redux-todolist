@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation, useParams, useRouteMatch } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Edit from '../../components/AddElement';
 import { useUpdateListMutation } from '../../service/listsService';
 import { useHistory } from 'react-router-dom';
@@ -35,7 +35,7 @@ const EditList = () => {
             toast.error(error.error);
         }
         return () => {};
-    }, [isSuccess, error]);
+    }, [isSuccess, error,history,isError,list_name]);
 
     return (
         <div>

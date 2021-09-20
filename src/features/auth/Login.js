@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLoginMutation } from '../../service/authService';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import {userLoggedin} from './userSlice';
+
 export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,11 +19,19 @@ export const Login = () => {
 
         login({ email, password });
     };
-    if (data && data.access_token) {
-        localStorage.setItem('todolist-token', JSON.stringify(data));
-        // dispatch(userLoggedin(data));
+
+    useEffect(() => {
+        if (data && data.access_token) {
+        console.log('data', data);
+        localStorage.setItem('todolist-data', JSON.stringify(data));
+         dispatch(userLoggedin(data));
         hist.replace('/');
     }
+        return () => {
+            
+        }
+    }, [dispatch,hist, data]);
+   
     return (
         <div className='col-md-6 m-auto'>
             {error && <h2 className='alert-danger'>{error.data.error}</h2>}
