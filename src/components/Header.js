@@ -1,6 +1,8 @@
 import { NavLink, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export const Header = () => {
+    const user = useSelector((state) => state.user);
     return (
         <nav className='navbar fixed-top navbar-expand-lg navbar-dark bg-dark'>
             <div className='container-fluid'>
@@ -27,39 +29,49 @@ export const Header = () => {
                                 Home
                             </NavLink>
                         </li>
-
-                        <li className='nav-item'>
-                            <NavLink
-                                activeClassName='active'
-                                className='nav-link'
-                                to='/lists'>
-                                Lists
-                            </NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink
-                                activeClassName='active'
-                                className='nav-link'
-                                to='/todos'>
-                                Todos
-                            </NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink
-                                activeClassName='active'
-                                className='nav-link'
-                                to='/login'>
-                                Login
-                            </NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink
-                                activeClassName='active'
-                                className='nav-link'
-                                to='/register'>
-                                Register
-                            </NavLink>
-                        </li>
+                        {user && (
+                            <li className='nav-item'>
+                                <NavLink
+                                    activeClassName='active'
+                                    className='nav-link'
+                                    to='/lists'>
+                                    Lists
+                                </NavLink>
+                            </li>
+                        )}
+                        {!user && (
+                            <>
+                                <li className='nav-item'>
+                                    <NavLink
+                                        activeClassName='active'
+                                        className='nav-link'
+                                        to='/login'>
+                                        Login
+                                    </NavLink>
+                                </li>
+                                <li className='nav-item'>
+                                    <NavLink
+                                        activeClassName='active'
+                                        className='nav-link'
+                                        to='/register'>
+                                        Register
+                                    </NavLink>
+                                </li>
+                            </>
+                        )}
+                        {user && (
+                            <>
+                                <li className='nav-link'>{user.name}</li>
+                                <li className='nav-item'>
+                                    <NavLink
+                                        activeClassName='active'
+                                        className='nav-link'
+                                        to='/logout'>
+                                        Logout
+                                    </NavLink>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
             </div>

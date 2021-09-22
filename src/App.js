@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-
 import './App.css';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +13,8 @@ import Lists from './features/lists/Lists';
 import { ToastContainer } from 'react-toastify';
 import EditList from './features/lists/EditList';
 import Login from './features/auth/Login';
+import Logout from './features/auth/Logout';
+import { PrivateRoute } from './components/PrivateRoute';
 function App() {
     useEffect(() => {
         return () => {};
@@ -26,18 +27,19 @@ function App() {
                     <Header />
                     <Switch>
                         <Route path='/login' component={Login}></Route>
-                        <Route path='/todos'>
+
+                        <PrivateRoute path='/lists/:list_id/todos'>
                             <Mytodos />
-                        </Route>
-                        <Route path='/lists/:list_id/todos'>
-                            <Mytodos />
-                        </Route>
-                        <Route path='/lists/:list_id/edit'>
+                        </PrivateRoute>
+                        <PrivateRoute path='/lists/:list_id/edit'>
                             <EditList />
-                        </Route>
-                        <Route exact path='(/|/lists)'>
+                        </PrivateRoute>
+                        <PrivateRoute exact path='(/|/lists)'>
                             <Lists />
-                        </Route>
+                        </PrivateRoute>
+                        <PrivateRoute exact path='/logout'>
+                            <Logout />
+                        </PrivateRoute>
                     </Switch>
                 </div>
             </Router>

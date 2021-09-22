@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLoginMutation } from '../../service/authService';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {userLoggedin} from './userSlice';
+import { userLoggedin } from './userSlice';
 
 export const Login = () => {
     const [email, setEmail] = useState('');
@@ -22,16 +22,15 @@ export const Login = () => {
 
     useEffect(() => {
         if (data && data.access_token) {
-        console.log('data', data);
-        localStorage.setItem('todolist-data', JSON.stringify(data));
-         dispatch(userLoggedin(data));
-        hist.replace('/');
-    }
-        return () => {
-            
+            console.log('data', data);
+
+            dispatch(userLoggedin(data));
+            hist.replace('/');
+            console.log('redirected home');
         }
-    }, [dispatch,hist, data]);
-   
+        return () => {};
+    }, [dispatch, hist, data]);
+
     return (
         <div className='col-md-6 m-auto'>
             {error && <h2 className='alert-danger'>{error.data.error}</h2>}
