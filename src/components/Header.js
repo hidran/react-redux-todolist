@@ -2,7 +2,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export const Header = () => {
-    const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.auth.user);
     return (
         <nav className='navbar fixed-top navbar-expand-lg navbar-dark bg-dark'>
             <div className='container-fluid'>

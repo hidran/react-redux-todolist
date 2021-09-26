@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-let initialState = null;
+let initialState = {
+    user: null,
+};
 const todoData = localStorage.getItem('todolist-data');
 if (todoData) {
-    alert('tok');
     const data = JSON.parse(todoData);
     if (data && data.access_token) {
         // header.content.passkey
@@ -17,34 +18,46 @@ if (todoData) {
             localStorage.removeItem('todolist-data');
         } else {
             initialState = {
-                name: data.name,
-                email: data.email,
+                user: {
+                    name: data.name,
+                    email: data.email,
+                },
             };
         }
     }
 }
-const UserSlice = createSlice({
-    name: 'user',
+export const UserSlice = createSlice({
+    name: 'auth',
     initialState,
     reducers: {
-        userLoggedin(state, action) {
+        userLoggedin(draft, action) {
             const data = action.payload;
 
             if (data && data.name) {
                 localStorage.setItem('todolist-data', JSON.stringify(data));
-                state = { name: data.name, email: data.email };
+                draft.user = { name: data.name, email: data.email };
             } else {
-                state = null;
+                draft.user = null;
             }
-            return state;
         },
-        userLoggedout(state) {
+        userLoggedout(draft) {
             localStorage.removeItem('todolist-data');
-            
-            return null;
+            draft.user = null;
+        },
+
+        userRegistered(draft, action) {
+            const data = action.payload;
+
+            if (data && data.name) {
+                localStorage.setItem('todolist-data', JSON.stringify(data));
+                draft.user = { name: data.name, email: data.email };
+            } else {
+                draft.user = null;
+            }
         },
     },
 });
 
-export const { userLoggedin, userLoggedout } = UserSlice.actions;
+export const { userLoggedin, userLoggedout, userRegistered } =
+    UserSlice.actions;
 export default UserSlice.reducer;
