@@ -3,6 +3,7 @@ import { useRegisterMutation } from '../../service/authService';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { userRegistered } from './userSlice';
+import FieldError from '../../components/FieldError';
 
 export const Register = () => {
     const [email, setEmail] = useState('');
@@ -32,10 +33,12 @@ export const Register = () => {
         }
         return () => {};
     }, [dispatch, hist, data]);
-
+    const emailErrors = error?.data?.errors?.email ?? [];
+    const nameErrors = error?.data?.errors?.name ?? [];
+    const passwordErrors = error?.data?.errors?.password ?? [];
     return (
         <div className='col-md-6 m-auto'>
-            <form onSubmit={verifyRegister}  method='POST'>
+            <form onSubmit={verifyRegister} method='POST'>
                 <div className='form-group'>
                     <label htmlFor='email'>Name</label>
                     <input
@@ -51,6 +54,7 @@ export const Register = () => {
                     <small id='emailHelp' className='form-text text-muted'>
                         We'll never share your email with anyone else.
                     </small>
+                    <FieldError errors={nameErrors} />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='email'>Email address</label>
@@ -67,6 +71,7 @@ export const Register = () => {
                     <small id='emailHelp' className='form-text text-muted'>
                         We'll never share your email with anyone else.
                     </small>
+                    <FieldError errors={emailErrors} />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='password'>Password</label>
@@ -79,6 +84,7 @@ export const Register = () => {
                         id='password'
                         placeholder='Password'
                     />
+                    <FieldError errors={passwordErrors} />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='confirmpassword'>Password</label>

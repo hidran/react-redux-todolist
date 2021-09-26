@@ -9,7 +9,11 @@ export const listsApi = createApi({
     }),
     endpoints: (builder) => ({
         getLists: builder.query({
-            query: () => '',
+            query: () => ({
+                headers: {
+                    Accept: 'application/json',
+                },
+            }),
             providesTags: (result, error) => {
                 if (error || !result || !result.data) {
                     return [{ type: 'LIST' }];
@@ -21,6 +25,9 @@ export const listsApi = createApi({
             query: (id) => ({
                 url: '/' + id,
                 method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                },
             }),
 
             invalidatesTags: ['LIST'], // (result,error, id) => {type:'LIST', id:id}
@@ -30,6 +37,9 @@ export const listsApi = createApi({
                 url: '',
                 method: 'POST',
                 body: list,
+                headers: {
+                    Accept: 'application/json',
+                },
             }),
             invalidatesTags: ['LIST'],
         }),
@@ -38,6 +48,9 @@ export const listsApi = createApi({
                 url: '/' + id,
                 method: 'PATCH',
                 body,
+                headers: {
+                    Accept: 'application/json',
+                },
             }),
 
             invalidatesTags: ['LIST'], // (result,error, id) => {type:'LIST', id:id}

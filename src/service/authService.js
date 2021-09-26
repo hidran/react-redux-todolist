@@ -15,6 +15,9 @@ export const AuthApi = createApi({
                     url: '/login',
                     method: 'POST',
                     body,
+                    headers: {
+                        Accept: 'application/json',
+                    },
                 };
             },
         }),
@@ -24,6 +27,9 @@ export const AuthApi = createApi({
                     url: '/register',
                     method: 'POST',
                     body,
+                    headers: {
+                        Accept: 'application/json',
+                    },
                 };
             },
         }),
