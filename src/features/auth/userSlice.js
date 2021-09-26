@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
     user: null,
+    token: null,
 };
 const todoData = localStorage.getItem('todolist-data');
 if (todoData) {
@@ -18,6 +19,7 @@ if (todoData) {
             localStorage.removeItem('todolist-data');
         } else {
             initialState = {
+                token: data.access_token,
                 user: {
                     name: data.name,
                     email: data.email,
@@ -36,6 +38,7 @@ export const UserSlice = createSlice({
             if (data && data.name) {
                 localStorage.setItem('todolist-data', JSON.stringify(data));
                 draft.user = { name: data.name, email: data.email };
+                draft.token = data.access_token;
             } else {
                 draft.user = null;
             }
@@ -51,6 +54,7 @@ export const UserSlice = createSlice({
             if (data && data.name) {
                 localStorage.setItem('todolist-data', JSON.stringify(data));
                 draft.user = { name: data.name, email: data.email };
+                draft.token = data.access_token;
             } else {
                 draft.user = null;
             }

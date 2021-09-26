@@ -1,11 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { LIST_URL } from '../config';
 // Define a service using a base URL and expected endpointsexport
+
 export const listsApi = createApi({
     reducerPath: 'lists',
     tagTypes: ['LIST'],
     baseQuery: fetchBaseQuery({
         baseUrl: LIST_URL,
+        prepareHeaders: (headers, { getState }) => {
+            const token = getState().auth.token;
+            headers.set('Accept', 'application/json');
+            // If we have a token set in state, let's assume that we should be passing it.
+            if (token) {
+                //headers.set('authorization', `Bearer ${token}`);
+            }
+            return headers;
+        },
     }),
     endpoints: (builder) => ({
         getLists: builder.query({

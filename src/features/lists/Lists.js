@@ -7,6 +7,8 @@ import {
 import { toast } from 'react-toastify';
 import React, { useEffect, useRef } from 'react';
 import AddList from '../../components/AddElement';
+import FieldError from '../../components/FieldError';
+
 const Lists = () => {
     const listEl = useRef('');
     const {
@@ -31,10 +33,15 @@ const Lists = () => {
             isError: isAddError,
         },
     ] = useAddListMutation();
-
+    const errorValue = typeof error === 'string' ? error : error?.data?.message;
+    const errorMessage = errorValue ? [errorValue] : [];
     useEffect(() => {
         if (error) {
-            toast.error(error);
+            if (typeof error === 'string') {
+                toast.error(error);
+            } else {
+                toast.error(error?.data?.message);
+            }
         }
         if (isFetching) {
             toast.info('Loading lists');
@@ -55,6 +62,7 @@ const Lists = () => {
     return (
         <>
             <h1>My lists</h1>
+            <FieldError errors={errorMessage} />
             <AddList
                 Ele={listEl}
                 manageClick={manageClick}

@@ -6,6 +6,15 @@ export const todosApi = createApi({
     tagTypes: ['TODOS'],
     baseQuery: fetchBaseQuery({
         baseUrl: TODO_URL,
+        prepareHeaders: (headers, { getState }) => {
+            const token = getState().auth.token;
+            headers.set('Accept', 'application/json');
+            // If we have a token set in state, let's assume that we should be passing it.
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`);
+            }
+            return headers;
+        },
     }),
     endpoints: (builder) => ({
         getTodos: builder.query({
